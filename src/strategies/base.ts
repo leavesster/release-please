@@ -589,7 +589,6 @@ export abstract class BaseStrategy implements Strategy {
       );
     if (!pullRequestTitle) {
       this.logger.error(`Bad pull request title: '${mergedPullRequest.title}'`);
-      return;
     }
     const branchName = BranchName.parse(
       mergedPullRequest.headBranchName,
@@ -648,7 +647,7 @@ export abstract class BaseStrategy implements Strategy {
       this.logger.warn('Failed to find release notes');
     }
 
-    let version: Version | undefined = pullRequestTitle.getVersion();
+    let version: Version | undefined = pullRequestTitle?.getVersion();
     if (
       !version ||
       (pullRequestBody.releaseData.length > 1 && releaseData?.version)
